@@ -9,9 +9,9 @@ import './app.css';
 function App() {
 
   const data = [
-    {name: 'John Smith', salary: 300, bonus: true},
-    {name: 'Adam Shepard', salary: 1000, bonus: false},
-    {name: 'Nick Codey', salary: 800, bonus: true},
+    {name: 'John Smith', salary: 300, bonus: true, id: 'rebfie'},
+    {name: 'Adam Shepard', salary: 1000, bonus: false, id: 'rhepwg'},
+    {name: 'Nick Codey', salary: 800, bonus: true, id: 'wfnownfgo'},
   ];
 
   return (

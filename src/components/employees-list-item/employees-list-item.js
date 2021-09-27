@@ -1,20 +1,52 @@
+import {Component} from 'react';
+
 import './employees-list-item.css';
 
-const EmployeesListItem = ({name, salary, bonus}) => {
+class EmployeesListItem extends Component {
+    constructor(props) {
+        super(props);
 
-    let classNames = 'list-group-item d-flex justify-content-between';
-
-    if(bonus) {
-        classNames += ' increase';
+        this.state = {
+            bonus: false,
+            like: false,
+        }
     }
 
-    return (
+    onBonus = () => {
+        this.setState(({bonus}) => ({
+            bonus: !bonus
+        }));
+    }
+
+    onLike = () => {
+        this.setState(({like}) => ({
+            like: !like
+        }))
+    }
+
+    render() {
+        let classNames = 'list-group-item d-flex justify-content-between';
+
+        const {name, salary} = this.props;
+        const {bonus, like} = this.state;
+
+        if(bonus) {
+            classNames += ' increase';
+        }
+
+        if(like) {
+            classNames += ' like';
+        }
+        return(
         <li className={classNames}>
-            <span className="list-group-item-label">{name}</span>
+            <span 
+            className="list-group-item-label"
+            onClick={this.onLike}>{name}</span>
             <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
-                    className="btn-cookie btn-sm ">
+                    className="btn-cookie btn-sm"
+                    onClick={this.onBonus}>
                     <i className="fas fa-cookie"></i>
                 </button>
 
@@ -25,7 +57,8 @@ const EmployeesListItem = ({name, salary, bonus}) => {
                 <i className="fas fa-star"></i>
             </div>
         </li>
-    )
-}
+        )
+    }
+} 
 
 export default EmployeesListItem;
