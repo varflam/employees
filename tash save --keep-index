@@ -1,0 +1,41 @@
+[33mcommit 80ffb38b763daebd1c2f6d7e119817ce92e94741[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Maria <alece.1414@gmail.com>
+Date:   Sat Oct 2 16:56:22 2021 +0300
+
+    filter added
+
+[33mcommit 0d4ad74a6371df12300d4c38bccac0e16b0e4bab[m
+Author: Maria <alece.1414@gmail.com>
+Date:   Sat Oct 2 15:41:16 2021 +0300
+
+    bug fix
+
+[33mcommit dd907324ff193715138744848f79c78adc6ad572[m
+Author: Maria <alece.1414@gmail.com>
+Date:   Thu Sep 30 23:59:20 2021 +0300
+
+    form submit added
+
+[33mcommit 64844b2893617e94875d718e7c4571518ded9245[m
+Author: Maria <alece.1414@gmail.com>
+Date:   Tue Sep 28 22:54:24 2021 +0300
+
+    add form upd
+
+[33mcommit 512062d396624a8bb4c3817b01128e114ac40446[m
+Author: Maria <alece.1414@gmail.com>
+Date:   Mon Sep 27 22:35:17 2021 +0300
+
+    state is modifed
+
+[33mcommit 84af6b0b49e6ac64439587c0c5e89e3e25b2de13[m
+Author: Maria <alece.1414@gmail.com>
+Date:   Sun Sep 26 21:51:21 2021 +0300
+
+    props are added
+
+[33mcommit 46f35693c5c93c1f1761812371b1303abfee9af2[m
+Author: Maria <alece.1414@gmail.com>
+Date:   Sat Sep 25 20:04:46 2021 +0300
+
+    main structure in done

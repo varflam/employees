@@ -14,6 +14,7 @@ const AppFilter = ({onFilterEmp, filter}) => {
             <button
                 type="button"
                 className={classNames}
+                key={name}
                 onClick={() => onFilterEmp(name)}>
                 {label}
                 </button>
