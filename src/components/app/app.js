@@ -16,9 +16,11 @@ class App extends Component {
     this.state = {
       data: [
         {name: 'John Smith', salary: 300, bonus: true, rise: true, id: nextId()},
-        {name: 'Adam Shepard', salary: 1000, bonus: false, rise: false, id: nextId()},
+        {name: 'Adam Shepard', salary: 2000, bonus: false, rise: false, id: nextId()},
         {name: 'Nick Codey', salary: 800, bonus: true, rise: false, id: nextId()},
       ],
+      term: '',
+      filter: '',
     }
   }
 
@@ -57,12 +59,44 @@ class App extends Component {
     }));
   }
 
+  searchEmp = (items, term) => {
+    if(term === '') return items;
+
+    return items.filter(item => {
+      return item.name.indexOf(term) > -1
+    });
+  }
+
+  onUpdateSearch = (term) => {
+    this.setState({term});
+  }
+
+  filterEmp = (filter) => {
+    const {data} = this.state;
+
+    switch(filter) {
+      case 'rise':
+        return data.filter(item => item.rise);
+      
+      case 'salary > 1000':
+        return data.filter(item => item.salary > 1000);
+
+      default:
+        return data;
+    }
+  }
+
+  onFilterEmp = (filter) => {
+    this.setState({filter});
+  }
+
   render() {
 
-    const {data} = this.state;
+    const {data, term, filter} = this.state;
 
     const employees = data.length;
     const employeesWithBonus = data.filter(item => item.bonus === true).length;
+    const visibleData = this.searchEmp(this.filterEmp(filter), term);
 
     return (
       <div className="app">
@@ -71,12 +105,15 @@ class App extends Component {
             employeesWithBonus={employeesWithBonus}/>
 
           <div className="search-panel">
-              <SearchPanel/>
-              <AppFilter/>
+              <SearchPanel
+              onUpdateSearch={this.onUpdateSearch}/>
+              <AppFilter
+              onFilterEmp={this.onFilterEmp}
+              filter={filter}/>
           </div>
           
           <EmployeesList 
-            data={data}
+            data={visibleData}
             onDelete={this.onDelete}
             onToggleProp={this.onToggleProp}/>
           <EmployeesAddForm
