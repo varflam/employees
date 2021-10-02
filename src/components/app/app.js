@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import nextId from "react-id-generator";
 
 import AppInfo from '../app-info/app-info';
 import SearchPanel from '../search-panel/search-panel';
@@ -14,11 +15,10 @@ class App extends Component {
 
     this.state = {
       data: [
-        {name: 'John Smith', salary: 300, bonus: true, id: '1'},
-        {name: 'Adam Shepard', salary: 1000, bonus: false, id: '2'},
-        {name: 'Nick Codey', salary: 800, bonus: true, id: '3'},
+        {name: 'John Smith', salary: 300, bonus: true, rise: true, id: nextId()},
+        {name: 'Adam Shepard', salary: 1000, bonus: false, rise: false, id: nextId()},
+        {name: 'Nick Codey', salary: 800, bonus: true, rise: false, id: nextId()},
       ],
-      maxId: 4
     }
   }
 
@@ -30,24 +30,45 @@ class App extends Component {
     });
   }
 
-  onAdd = (obj) => {
-    this.setState(({data, maxId}) => {
-      obj.id = maxId;
-      const newArr = data.concat(obj);
+  onAdd = (name, salary) => {
+    const employee = {
+      name,
+      salary,
+      bonus: false,
+      rise: false,
+      id: nextId()
+    }
+
+    this.setState(({data}) => {
       return {
-        data: newArr,
-        maxId: maxId + 1
+        data: data.concat(employee),
       }
-    })
+    });
+  }
+
+  onToggleProp = (id, prop) => {
+    this.setState(({data}) => ({
+      data: data.map(item => {
+        if (item.id === id) {
+          return {...item, [prop]: !item[prop]};
+        }
+          return item;
+      })
+    }));
   }
 
   render() {
 
     const {data} = this.state;
 
+    const employees = data.length;
+    const employeesWithBonus = data.filter(item => item.bonus === true).length;
+
     return (
       <div className="app">
-          <AppInfo />
+          <AppInfo 
+            employees={employees}
+            employeesWithBonus={employeesWithBonus}/>
 
           <div className="search-panel">
               <SearchPanel/>
@@ -56,7 +77,8 @@ class App extends Component {
           
           <EmployeesList 
             data={data}
-            onDelete={this.onDelete}/>
+            onDelete={this.onDelete}
+            onToggleProp={this.onToggleProp}/>
           <EmployeesAddForm
             onAdd={this.onAdd}/>
       </div>
