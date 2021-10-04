@@ -1,41 +1,69 @@
+import { Component } from 'react';
 
 import './employees-list-item.css';
 
-const EmployeesListItem = (props) => {
-    let classNames = 'list-group-item d-flex justify-content-between';
+class EmployeesListItem extends Component {
 
-    const {name, salary, onDelete, onToggleProp, bonus, rise} = props;
-    if(bonus) {
-        classNames += ' increase';
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            salary: this.props.salary,
+        }
     }
 
-    if(rise) {
-        classNames += ' like';
-    }
-    return(
-        <li className={classNames}>
-            <span 
-            className="list-group-item-label"
-            onClick={onToggleProp}
-            data-toggle="rise">{name}</span>
-            <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
-            <div className='d-flex justify-content-center align-items-center'>
-                <button type="button"
-                    className="btn-cookie btn-sm"
-                    onClick={onToggleProp}
-                    data-toggle="bonus">
-                    <i className="fas fa-cookie"></i>
-                </button>
+    onSalaryChange = (e) => {
 
-                <button type="button"
-                        className="btn-trash btn-sm"
-                        onClick={onDelete}>
-                    <i className="fas fa-trash"></i>
-                </button>
-                <i className="fas fa-star"></i>
-            </div>
-        </li>
-    )
-} 
+        const {onSalaryChange, name} = this.props;
+
+        this.setState(({salary}) => ({
+            salary: e.target.value
+        }));
+
+        onSalaryChange(name, e.target.value)
+    }
+
+    render() {
+        let classNames = 'list-group-item d-flex justify-content-between';
+
+        const {name, onDelete, onToggleProp, bonus, rise} = this.props;
+        if(bonus) {
+            classNames += ' increase';
+        }
+    
+        if(rise) {
+            classNames += ' like';
+        }
+
+        return(
+            <li className={classNames}>
+                <span 
+                className="list-group-item-label"
+                onClick={onToggleProp}
+                data-toggle="rise">{name}</span>
+                <input 
+                    type="text" 
+                    className="list-group-item-input" 
+                    value={this.state.salary}
+                    onChange={this.onSalaryChange}/>
+                <div className='d-flex justify-content-center align-items-center'>
+                    <button type="button"
+                        className="btn-cookie btn-sm"
+                        onClick={onToggleProp}
+                        data-toggle="bonus">
+                        <i className="fas fa-cookie"></i>
+                    </button>
+    
+                    <button type="button"
+                            className="btn-trash btn-sm"
+                            onClick={onDelete}>
+                        <i className="fas fa-trash"></i>
+                    </button>
+                    <i className="fas fa-star"></i>
+                </div>
+            </li>
+        )
+    }
+}
 
 export default EmployeesListItem;
